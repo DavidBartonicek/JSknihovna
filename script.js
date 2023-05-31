@@ -1,38 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const sliderImages = document.querySelectorAll('.slider img');
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
+  const gallery = document.querySelector('.gallery');
+  const modalContainer = document.querySelector('.modal-container');
+  const modalImg = document.querySelector('.modal-img');
+  const modalClose = document.querySelector('.modal-close');
+  const modalNext = document.querySelector('.modal-next');
+  const modalPrev = document.querySelector('.modal-prev');
   let currentSlide = 0;
 
-  function resetSlides() {
-    sliderImages.forEach(function(image) {
-      image.classList.remove('active');
-    });
+  function showSlide(index) {
+    const images = gallery.querySelectorAll('img');
+    modalImg.src = images[index].src;
+    currentSlide = index;
   }
 
-  function showSlide() {
-    resetSlides();
-    sliderImages[currentSlide].classList.add('active');
+  function openModal() {
+    modalContainer.classList.add('active');
+  }
+
+  function closeModal() {
+    modalContainer.classList.remove('active');
   }
 
   function nextSlide() {
     currentSlide++;
-    if (currentSlide >= sliderImages.length) {
+    const images = gallery.querySelectorAll('img');
+    if (currentSlide >= images.length) {
       currentSlide = 0;
     }
-    showSlide();
+    showSlide(currentSlide);
   }
 
   function prevSlide() {
     currentSlide--;
+    const images = gallery.querySelectorAll('img');
     if (currentSlide < 0) {
-      currentSlide = sliderImages.length - 1;
+      currentSlide = images.length - 1;
     }
-    showSlide();
+    showSlide(currentSlide);
   }
 
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
+  gallery.addEventListener('click', function(e) {
+    if (e.target.tagName === 'IMG') {
+      const index = Array.from(gallery.querySelectorAll('img')).indexOf(e.target);
+      showSlide(index);
+      openModal();
+    }
+  });
 
-  showSlide();
+  modalClose.addEventListener('click', closeModal);
+  modalNext.addEventListener('click', nextSlide);
+  modalPrev.addEventListener('click', prevSlide);
 });
