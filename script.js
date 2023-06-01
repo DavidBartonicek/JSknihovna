@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadLink.href = images[currentSlide].getAttribute('data-original');
     downloadLink.download = 'image.png'; // Název souboru ke stažení
     downloadLink.target = '_blank';
+    document.body.appendChild(downloadLink);
     downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 
   gallery.addEventListener('click', function(e) {
