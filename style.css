@@ -7,6 +7,7 @@
 
 .gallery-container {
   max-width: 800px;
+  position: relative; /* Přidáno */
 }
 
 .gallery {
@@ -95,11 +96,10 @@
   margin-left: 20px;
 }
 
-
-
 .modal-prev {
   order: -1;
 }
+
 .modal-download {
   position: absolute;
   bottom: 10px;
@@ -115,6 +115,7 @@
   background-color: transparent;
   bottom: 45px;
 }
+
 .gallery img,
 .modal-prev,
 .modal-next,
@@ -149,4 +150,20 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+
+/* Nově přidaný kód pro pozici tlačítek */
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal-prev {
+  left: 20px;
+}
+
+.modal-next {
+  right: 20px;
 }
